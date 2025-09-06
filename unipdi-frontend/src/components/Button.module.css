@@ -1,0 +1,13 @@
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:8px; padding:10px 16px; border:0; border-radius:var(--radius);
+  background:var(--primary); color:#fff; font-weight:700; cursor:pointer;
+  box-shadow:var(--shadow); transition:transform .06s ease, filter .2s ease, background .2s ease;
+}
+.btn:hover{ filter:brightness(1.05); }
+.btn:active{ transform: translateY(1px); }
+.ghost{ background:transparent; color:var(--text); border:1px solid #e5e7eb; box-shadow:none; }
+.ghost:hover{ background:#f3f4f6; }
+.danger{ background:var(--danger); }
+.small{ padding:8px 12px; font-weight:600; }
+.block{ width:100%; }

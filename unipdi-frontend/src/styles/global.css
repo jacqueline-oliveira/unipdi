@@ -1,0 +1,25 @@
+:root{
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --primary: #2563eb;
+  --primary-600: #1d4ed8;
+  --danger: #ef4444;
+  --radius: 12px;
+  --shadow: 0 8px 24px rgba(2,6,23,.06);
+}
+
+body{
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  background: linear-gradient(180deg,#f9fafb,#eef2f7 60%,#e9eef7);
+  color: var(--text);
+}
+
+.container { max-width: 1040px; margin: 0 auto; padding: 24px; }
+.grid { display: grid; gap: 16px; }
+.grid2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+@media (max-width: 720px){ .grid2{ grid-template-columns: 1fr; } }
+.sectionTitle { font-weight: 800; letter-spacing: -0.01em; }
+.subtle { color: var(--muted); font-size: .95rem; }
+.link { text-decoration: none; color: inherit; }

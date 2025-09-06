@@ -1,0 +1,14 @@
+services:
+  mongo:
+    image: mongo:6.0
+    container_name: unipdi-mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: unipdi
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
