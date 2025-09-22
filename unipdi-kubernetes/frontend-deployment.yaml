@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: jacquetech/unipdi-frontend
+          ports:
+            - containerPort: 80
+          env:
+            - name: BACKEND_URL
+              value: "http://backend:8080"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-frontend
+spec:
+  selector:
+    app: frontend
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 30000
+  type: NodePort

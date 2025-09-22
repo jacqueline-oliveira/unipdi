@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-backend-unipdi
+spec:
+  containers:
+  - name: mongo-container
+    image: mongo:6.0
+    ports:
+      - containerPort: 27017
+  - name: backend-container
+    image: jacquetech/unipdi-backend  
+    ports:
+      - containerPort: 8080

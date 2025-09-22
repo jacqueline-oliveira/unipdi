@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-configmap
+data:
+  MONGO_HOST: svc-mongo
+  MONGO_DB: unipdi
