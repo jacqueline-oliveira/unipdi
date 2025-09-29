@@ -3,13 +3,13 @@ import api from "../api/api";
 import Input from "./Input";
 import Button from "./Button";
 
-export default function MetaForm({ pdiId, onSuccess }) {
+export default function MetaForm({ pdiId, matricula, onSuccess }) {
   const [descricao, setDescricao] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post(`/pdis/${pdiId}/metas`, { descricao, concluida: false });
+      await api.post(`/pdis/${matricula}/${pdiId}/metas`, { descricao, concluida: false });
       setDescricao("");
       onSuccess?.();
     } catch (err) {

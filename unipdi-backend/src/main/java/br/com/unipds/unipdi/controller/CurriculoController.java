@@ -1,8 +1,8 @@
 package br.com.unipds.unipdi.controller;
 
 import br.com.unipds.unipdi.model.Pessoa;
-import br.com.unipds.unipdi.repository.PessoaRepository;
 import br.com.unipds.unipdi.service.CurriculoService;
+import br.com.unipds.unipdi.service.PessoaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,11 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class CurriculoController {
 
     private final CurriculoService curriculoService;
-    private final PessoaRepository pessoaRepository;
+    private final PessoaService pessoaService;
 
-    public CurriculoController(CurriculoService curriculoService, PessoaRepository pessoaRepository) {
+    public CurriculoController(CurriculoService curriculoService, PessoaService pessoaService) {
         this.curriculoService = curriculoService;
-        this.pessoaRepository = pessoaRepository;
+        this.pessoaService = pessoaService;
     }
 
     @PostMapping("/{matricula}/upload")
@@ -29,13 +29,13 @@ public class CurriculoController {
             @PathVariable String matricula,
             @RequestParam("file") MultipartFile file) {
         try {
-            Pessoa pessoa = pessoaRepository.findByMatricula(matricula)
+            Pessoa pessoa = pessoaService.buscaPessoa(matricula)
                     .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada com matrícula " + matricula));
 
             curriculoService.uploadCurriculo(matricula, file);
-            String url = curriculoService.gerarPresignedUrl(matricula, 5); // válido por 15 min
+            String url = curriculoService.gerarPresignedUrl(matricula, 5);
             pessoa.setCurriculoUrl(url);
-            pessoaRepository.save(pessoa);
+            pessoaService.gravaPessoa(pessoa);
 
             return ResponseEntity.ok("Curriculo enviado com sucesso!");
         } catch (Exception e) {
@@ -45,7 +45,7 @@ public class CurriculoController {
 
     @GetMapping("/{matricula}/url")
     public ResponseEntity<String> getCurriculoUrl(@PathVariable String matricula) {
-        Pessoa pessoa = pessoaRepository.findByMatricula(matricula)
+        Pessoa pessoa = pessoaService.buscaPessoa(matricula)
                 .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada com matrícula " + matricula));
 
         if (pessoa.getCurriculoUrl() == null) {
@@ -57,9 +57,9 @@ public class CurriculoController {
     }
 
     private String gravarUrl(Pessoa pessoa){
-        String url = curriculoService.gerarPresignedUrl(pessoa.getMatricula(), 5); // válido por 15 min
+        String url = curriculoService.gerarPresignedUrl(pessoa.getMatricula(), 5);
         pessoa.setCurriculoUrl(url);
-        pessoaRepository.save(pessoa);
+        pessoaService.gravaPessoa(pessoa);
         return url;
     }
 }

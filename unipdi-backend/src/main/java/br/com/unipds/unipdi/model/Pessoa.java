@@ -1,23 +1,45 @@
 package br.com.unipds.unipdi.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
+import br.com.unipds.unipdi.config.TableName;
+import br.com.unipds.unipdi.dto.PessoaRequestDto;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbAttribute;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbPartitionKey;
 
-@Document(collection = "pessoas")
+import java.util.List;
+
+@DynamoDbBean
+@TableName(name = "Pessoa")
 public class Pessoa {
-    @Id
-    private String id;
 
-    @Indexed(unique = true) // garante unicidade no MongoDB
     private String matricula;
-
     private String nome;
-
     private String curriculoUrl;
+    private List<Pdi> pdis;
 
-    public Pessoa(String matricula, String nome) {
+    public static Pessoa novaPessoa(PessoaRequestDto dto) {
+        var pessoa = new Pessoa();
+        pessoa.setMatricula(dto.matricula());
+        pessoa.setNome(dto.nome());
+        pessoa.setCurriculoUrl(dto.curriculoUrl());
+        return pessoa;
+    }
+
+    @DynamoDbPartitionKey
+    @DynamoDbAttribute("matricula")
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -29,15 +51,15 @@ public class Pessoa {
         this.curriculoUrl = curriculoUrl;
     }
 
-    public String getId() {
-        return id;
+    public List<Pdi> getPdis() {
+        return pdis;
     }
 
-    public String getMatricula() {
-        return matricula;
+    public void setPdis(List<Pdi> pdis) {
+        this.pdis = pdis;
     }
 
-    public String getNome() {
-        return nome;
+    public void adicionaPdi(Pdi pdi) {
+        this.pdis.add(pdi);
     }
 }

@@ -65,7 +65,7 @@ export default function PdiPage({ pessoa: pessoaProp }) {
                   </ul>
 
                   <div style={{marginTop:8}}>
-                    <MetaForm pdiId={pdi.id} onSuccess={carregarPdis} />
+                    <MetaForm pdiId={pdi.id} matricula={pessoa.matricula}  onSuccess={carregarPdis} />
                   </div>
                 </li>
               ))}

@@ -1,7 +1,9 @@
 package br.com.unipds.unipdi.dto;
 
+import java.util.UUID;
+
 public record MetaResponseDto(
-        String id,
+        UUID id,
         String descricao,
         boolean concluida
 ) {

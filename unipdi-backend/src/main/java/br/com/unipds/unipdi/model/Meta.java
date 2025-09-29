@@ -1,32 +1,49 @@
 package br.com.unipds.unipdi.model;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import br.com.unipds.unipdi.dto.MetaRequestDto;
+import software.amazon.awssdk.enhanced.dynamodb.mapper.annotations.DynamoDbBean;
 
+import java.util.UUID;
+
+@DynamoDbBean
 public class Meta {
-    @Id
-    private String id;
+    private UUID id;
     private String descricao;
     private boolean concluida;
 
     public Meta() {}
 
     public Meta(String descricao, boolean concluida) {
-        this.id = new ObjectId().toString();
+        this.id = UUID.randomUUID();
         this.descricao = descricao;
         this.concluida = concluida;
     }
 
-    public String getId() {
+    public static Meta fromDto(MetaRequestDto dto) {
+        return new Meta(dto.descricao(), false);
+    }
+
+    public UUID getId() {
         return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     public boolean isConcluida() {
         return concluida;
+    }
+
+    public void setConcluida(boolean concluida) {
+        this.concluida = concluida;
     }
 }

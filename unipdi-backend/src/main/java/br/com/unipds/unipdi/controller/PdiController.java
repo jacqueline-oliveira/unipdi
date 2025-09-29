@@ -32,13 +32,8 @@ public class PdiController {
         return pdiService.buscarPorMatricula(matricula);
     }
 
-    @GetMapping
-    public List<PdiResponseDto> buscarTodos() {
-        return pdiService.buscarTodos();
-    }
-
-    @PostMapping("/{pdiId}/metas")
-    public PdiResponseDto adicionarMeta(@PathVariable String pdiId, @RequestBody MetaRequestDto dto) {
-        return pdiService.adicionarMeta(pdiId, dto);
+    @PostMapping("/{matricula}/{pdiId}/metas")
+    public PdiResponseDto adicionarMeta(@PathVariable String matricula, @PathVariable String pdiId, @RequestBody MetaRequestDto dto) {
+        return pdiService.adicionarMeta(matricula, pdiId, dto);
     }
 }

@@ -1,8 +1,9 @@
 package br.com.unipds.unipdi.controller;
 
-import br.com.unipds.unipdi.service.PessoaService;
 import br.com.unipds.unipdi.dto.PessoaRequestDto;
 import br.com.unipds.unipdi.dto.PessoaResponseDto;
+import br.com.unipds.unipdi.model.Pessoa;
+import br.com.unipds.unipdi.service.PessoaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,7 +34,8 @@ public class PessoaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PessoaResponseDto>> buscarTodos() {
-        return ResponseEntity.ok(pessoaService.buscarTodos());
+    public ResponseEntity<List<Pessoa>> listar() {
+        return ResponseEntity.ok(pessoaService.listarTodas());
     }
+
 }
