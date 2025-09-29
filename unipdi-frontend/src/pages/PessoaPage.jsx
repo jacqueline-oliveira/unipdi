@@ -32,16 +32,38 @@ export default function PessoasPage() {
             <h2 className="sectionTitle">Lista de Pessoas</h2>
             <ul style={{listStyle:'none', marginTop:12}}>
 
-              {pessoas.map((p) => (
-                <li key={p.id} style={{display:'flex', alignItems:'center', justifyContent:'space-between', padding:'10px 0', borderBottom:'1px solid #eee'}}>
-                  <div>
-                    <div style={{fontWeight:700}}>{p.nome}</div>
-                    <div className="subtle">{p.matricula}</div>
-                  </div>
-                  <Button size="small" onClick={() => navigate(`/pessoas/${p.matricula}`)}>
-                    Gerenciar PDI
-                  </Button>
-                </li>
+            { pessoas.map((p) => (
+              <li 
+                key={p.id} 
+                style={{
+                  display:'flex', 
+                  alignItems:'center', 
+                  justifyContent:'space-between', 
+                  padding:'10px 0', 
+                  borderBottom:'1px solid #eee'
+                }}
+              >
+              <div>
+                <div style={{fontWeight:700}}>{p.nome}</div>
+                <div className="subtle">{p.matricula}</div>
+              </div>
+
+              <div style={{ display:'flex', gap:8 }}>
+                <Button 
+                  size="small" 
+                  onClick={() => navigate(`/pessoas/${p.matricula}`)}
+                >
+                  Gerenciar PDI
+                </Button>
+
+                <Button 
+                  size="small" 
+                  onClick={() => navigate(`/curriculo/${p.matricula}`)}
+                >
+                  Currículo
+                </Button>
+              </div>
+            </li>  
               ))}
 
               {!pessoas.length && <li className="subtle">Nenhum registro ainda.</li>}

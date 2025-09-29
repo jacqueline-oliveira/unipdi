@@ -14,9 +14,19 @@ public class Pessoa {
 
     private String nome;
 
+    private String curriculoUrl;
+
     public Pessoa(String matricula, String nome) {
         this.matricula = matricula;
         this.nome = nome;
+    }
+
+    public String getCurriculoUrl() {
+        return curriculoUrl;
+    }
+
+    public void setCurriculoUrl(String curriculoUrl) {
+        this.curriculoUrl = curriculoUrl;
     }
 
     public String getId() {

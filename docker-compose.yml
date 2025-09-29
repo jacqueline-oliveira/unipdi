@@ -11,25 +11,25 @@ services:
     ports:
       - "27017:27017"
 
-  backend:
-    image: jacquetech/unipdi-backend
-    container_name: backend
-    restart: unless-stopped
-    depends_on:
-      - mongo 
-    environment:
-      SPRING_DATA_MONGODB_URI: "mongodb://root:rootpass@mongo:27017/unipdi?authSource=admin"
-    ports:
-      - "8080:8080"
+  # backend:
+  #   image: jacquetech/unipdi-backend
+  #   container_name: backend
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - mongo 
+  #   environment:
+  #     SPRING_DATA_MONGODB_URI: "mongodb://root:rootpass@mongo:27017/unipdi?authSource=admin"
+  #   ports:
+  #     - "8080:8080"
 
-  frontend:
-    image: jacquetech/unipdi-frontend
-    container_name: frontend
-    restart: unless-stopped
-    depends_on:
-      - backend
-    ports:
-      - "5173:80"
+  # frontend:
+  #   image: jacquetech/unipdi-frontend
+  #   container_name: frontend
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - backend
+  #   ports:
+  #     - "5173:80"
 
 volumes:
   mongo_data:

@@ -24,20 +24,20 @@ public class PessoaService {
         Pessoa pessoa = new Pessoa(dto.matricula(), dto.nome());
         Pessoa salva = pessoaRepository.save(pessoa);
 
-        return new PessoaResponseDto(salva.getId(), salva.getMatricula(), salva.getNome());
+        return new PessoaResponseDto(salva.getId(), salva.getMatricula(), salva.getNome(), salva.getCurriculoUrl());
     }
 
     public PessoaResponseDto buscarPorMatricula(String matricula) {
         Pessoa pessoa = pessoaRepository.findByMatricula(matricula)
                 .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada com matrícula " + matricula));
 
-        return new PessoaResponseDto(pessoa.getId(), pessoa.getMatricula(), pessoa.getNome());
+        return new PessoaResponseDto(pessoa.getId(), pessoa.getMatricula(), pessoa.getNome(), pessoa.getCurriculoUrl());
     }
 
     public List<PessoaResponseDto> buscarTodos() {
         List<Pessoa> pessoas = pessoaRepository.findAll();
         return pessoas.stream().map(p ->
-                new PessoaResponseDto(p.getId(),p.getMatricula(), p.getNome()))
+                new PessoaResponseDto(p.getId(),p.getMatricula(), p.getNome(), p.getCurriculoUrl()))
                 .toList();
     }
 }
