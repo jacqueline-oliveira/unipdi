@@ -18,9 +18,11 @@ jobs:
 
     - name: Build com Maven
       run: mvn clean package -DskipTests
+      working-directory: ./unipdi-notificacao
 
     - name: Renomear arquivo jar
       run: mv target/unipdi*.jar target/unipdi-notificacao.jar
+      working-directory: ./unipdi-notificacao
 
     - name: Configurar Credenciais da AWS
       uses: aws-actions/configure-aws-credentials@v4    
