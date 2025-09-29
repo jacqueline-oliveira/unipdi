@@ -13,7 +13,7 @@ jobs:
     - name: Setup do Java
       uses: actions/setup-java@v3
       with: 
-        java-verson: '21'
+        java-version: '21'
         distribution: 'temurin'
 
     - name: Build com Maven

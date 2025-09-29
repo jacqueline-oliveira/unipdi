@@ -50,7 +50,7 @@ public class NotificacaoHandler implements RequestHandler<S3Event, String> {
             SimpleMailMessage mail = new SimpleMailMessage();
             mail.setTo(destinatario);
             mail.setSubject("Novo arquivo enviado para o bucket " + bucket);
-            mail.setText("Arquivo novo: " + key + " no bucket. Verifique!");
+            mail.setText("Alguém fez upload de um novo currículo: " + key + " no bucket. Verifique!");
 
             mailSender.send(mail);
 
